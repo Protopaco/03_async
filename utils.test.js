@@ -1,14 +1,48 @@
-const { writeFile } = require('./utils.js');
+const { writeFile, readFile } = require('./utils.js');
 const fsPromises = require('fs').promises;
 
+const testFilePath = './test.txt';
+const testData = "Hello World!";
+const testData2 = "Goodbye World!";
 
 describe('tests writeFile', () => {
     it('checks test.txt to see if it contains "Hello World!"', async () => {
-        const testData = "Hello World!";
 
-        await writeFile();
-        const returnedData = await fsPromises.readFile('./test.txt', 'utf-8');
+        await writeFile(testFilePath, testData);
+        const returnedData = await fsPromises.readFile(testFilePath, 'utf-8');
 
         expect(returnedData).toEqual(testData);
     })
+
+    it('checks test.txt to see if it constains "Goodbye World!"', async () => {
+        await writeFile(testFilePath, testData2);
+        const returnedData = await fsPromises.readFile(testFilePath, 'utf-8');
+
+        expect(returnedData).toEqual(testData2);
+    })
+
+    afterEach(async () => {
+        await fsPromises.rm(testFilePath);
+    })
+})
+
+describe('tests readFile', () => {
+    it('checks test.txt to see if it contains "Hello World!"', async () => {
+        await fsPromises.writeFile(testFilePath, testData);
+        const returnedData = await readFile(testFilePath);
+        expect(returnedData).toEqual(testData);
+
+    })
+    it('checks test.txt to see if it contains "Goodbye World!"', async () => {
+        await fsPromises.writeFile(testFilePath, testData2);
+        const returnedData = await readFile(testFilePath);
+        expect(returnedData).toEqual(testData2);
+
+    })
+
+
+    afterEach(async () => {
+        await fsPromises.rm(testFilePath);
+    })
+
 })
