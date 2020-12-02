@@ -11,7 +11,6 @@ const writeFile = async (filePath, data) => {
 
 const readFile = async (filePath) => {
     try {
-        console.log(filePath)
         return fsPromises.readFile(filePath, 'utf-8');
     }
     catch (e) {
@@ -19,6 +18,20 @@ const readFile = async (filePath) => {
     }
 }
 
+const copyFile = async (filePath) => {
+    const copiedFilePath = returnCopiedFilePath(filePath);
+
+    const returnedData = await fsPromises.readFile(filePath, 'utf-8');
+    await fsPromises.writeFile(copiedFilePath, returnedData);
+}
+
+const returnCopiedFilePath = (filePath) => {
+    const fileNamePos = filePath.lastIndexOf('/');
+    const splitFilePath = filePath.split('')
+    splitFilePath.splice(fileNamePos + 1, 0, 'copy-')
+    return splitFilePath.join('');
+}
 
 
-module.exports = { writeFile, readFile };
+
+module.exports = { writeFile, readFile, copyFile };
