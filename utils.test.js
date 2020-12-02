@@ -56,8 +56,23 @@ describe('test copyFile', () => {
         const returnedData = await fsPromises.readFile(copiedFilePath, 'utf-8');
 
         expect(returnedData).toEqual(testData);
-    }
-    )
+    });
+
+    it('checks copy-test.txt to see if it contains "Goodbye World!"', async () => {
+
+        await fsPromises.writeFile(testFilePath, testData2);
+        await copyFile(testFilePath);
+        const returnedData = await fsPromises.readFile(copiedFilePath, 'utf-8');
+
+        expect(returnedData).toEqual(testData2);
+    });
+
+
+    afterEach(async () => {
+        await fsPromises.rm(testFilePath);
+        await fsPromises.rm(copiedFilePath);
+
+    })
 
 
 
