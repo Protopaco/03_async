@@ -1,0 +1,26 @@
+{
+  "name": "03_async",
+  "version": "1.0.0",
+  "description": "",
+  "main": "utils.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "npm run test -- --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Protopaco/03_async.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Protopaco/03_async/issues"
+  },
+  "homepage": "https://github.com/Protopaco/03_async#readme",
+  "devDependencies": {
+    "@types/jest": "^26.0.16",
+    "eslint": "^7.14.0",
+    "jest": "^26.6.3"
+  }
+}
