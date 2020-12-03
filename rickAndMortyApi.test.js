@@ -36,7 +36,7 @@ describe('tests getCharacter', () => {
 
     it('calls getCharacter, and expects to see name, status, & species', () => {
 
-        fetch.mockResolvedValue(Promise.resolve({
+        fetch.mockResolvedValueOnce(Promise.resolve({
             json: () => {
                 return {
                     name: 'Rick Sanchez',
@@ -63,11 +63,39 @@ describe('tests getCharacter', () => {
 //     })
 // })
 
-// describe('tests getManyCharacters', () => {
-//     it('calls getManyCharacters, and expects to see name, status & species for each', () => {
-//         return getManyCharacters(idArray)
-//             .then((result) => {
-//                 return expect(expectedArrayResult).toEqual(result)
-//             })
-//     })
-// })
+describe('tests getManyCharacters', () => {
+    it('calls getManyCharacters, and expects to see name, status & species for each', async () => {
+
+        fetch.mockResolvedValueOnce(Promise.resolve({
+            json: () => {
+                return {
+                    name: 'Rick Sanchez',
+                    status: 'Alive',
+                    species: 'Human'
+                }
+            }
+        }));
+        fetch.mockResolvedValueOnce(Promise.resolve({
+            json: () => {
+                return {
+                    name: 'Morty Smith',
+                    status: 'Alive',
+                    species: 'Human'
+                }
+            }
+        }));
+        fetch.mockResolvedValueOnce(Promise.resolve({
+            json: () => {
+                return {
+                    name: 'Summer Smith',
+                    status: 'Alive',
+                    species: 'Human'
+                }
+            }
+        }));
+        return getManyCharacters(idArray)
+            .then((result) => {
+                return expect(result).toEqual(expectedArrayResult)
+            })
+    })
+})
