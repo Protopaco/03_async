@@ -4,7 +4,7 @@ const fsPromises = require('fs').promises;
 const writeFile = (filePath, data) => {
 
     return fsPromises.writeFile(filePath, data)
-        .then(() => console.log('done'))
+        // .then(() => console.log('done'))
         .catch(err => console.log(err));
 }
 

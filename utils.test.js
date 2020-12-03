@@ -15,7 +15,7 @@ describe('tests writeFile', () => {
     it('checks test.txt to see if it contains "Hello World!"', async () => {
         let returnedData;
         try {
-            await fsPromises.writeFile(testFilePath, testData);
+            await writeFile(testFilePath, testData);
             returnedData = await fsPromises.readFile(testFilePath, 'utf-8');
         } catch (e) {
             throw (e.message)
@@ -24,9 +24,8 @@ describe('tests writeFile', () => {
     })
 
     it('checks test.txt to see if it constains "Goodbye World!"', async () => {
-        await fsPromises.writeFile(testFilePath, testData2);
+        await writeFile(testFilePath, testData2);
         const returnedData = await fsPromises.readFile(testFilePath, 'utf-8');
-        console.log(returnedData)
         expect(returnedData).toEqual(testData2);
     })
 
@@ -34,6 +33,11 @@ describe('tests writeFile', () => {
 })
 
 describe('tests readFile', () => {
+
+    afterEach(async () => {
+        await fsPromises.rm(testFilePath);
+    })
+
     it('checks test.txt to see if it contains "Hello World!"', async () => {
         await fsPromises.writeFile(testFilePath, testData);
         const returnedData = await readFile(testFilePath);
@@ -47,9 +51,6 @@ describe('tests readFile', () => {
 
     })
 
-    afterEach(async () => {
-        await fsPromises.rm(testFilePath);
-    })
 
 })
 
