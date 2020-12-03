@@ -7,24 +7,30 @@ const testData2 = "Goodbye World!";
 const copiedFilePath = './copy-test.txt';
 
 describe('tests writeFile', () => {
-    it('checks test.txt to see if it contains "Hello World!"', async () => {
-
-        await writeFile(testFilePath, testData);
-        const returnedData = await fsPromises.readFile(testFilePath, 'utf-8');
-
-        expect(returnedData).toEqual(testData);
-    })
-
-    it('checks test.txt to see if it constains "Goodbye World!"', async () => {
-        await writeFile(testFilePath, testData2);
-        const returnedData = await fsPromises.readFile(testFilePath, 'utf-8');
-
-        expect(returnedData).toEqual(testData2);
-    })
 
     afterEach(async () => {
         await fsPromises.rm(testFilePath);
     })
+
+    it('checks test.txt to see if it contains "Hello World!"', async () => {
+        let returnedData;
+        try {
+            await fsPromises.writeFile(testFilePath, testData);
+            returnedData = await fsPromises.readFile(testFilePath, 'utf-8');
+        } catch (e) {
+            throw (e.message)
+        }
+        expect(returnedData).toEqual(testData);
+    })
+
+    it('checks test.txt to see if it constains "Goodbye World!"', async () => {
+        await fsPromises.writeFile(testFilePath, testData2);
+        const returnedData = await fsPromises.readFile(testFilePath, 'utf-8');
+        console.log(returnedData)
+        expect(returnedData).toEqual(testData2);
+    })
+
+
 })
 
 describe('tests readFile', () => {
@@ -41,7 +47,6 @@ describe('tests readFile', () => {
 
     })
 
-
     afterEach(async () => {
         await fsPromises.rm(testFilePath);
     })
@@ -49,6 +54,12 @@ describe('tests readFile', () => {
 })
 
 describe('test copyFile', () => {
+
+    afterEach(async () => {
+        await fsPromises.rm(testFilePath);
+        await fsPromises.rm(copiedFilePath);
+    })
+
     it('checks copy-test.txt to see if it contains "Hello World!"', async () => {
 
         await fsPromises.writeFile(testFilePath, testData);
@@ -66,13 +77,6 @@ describe('test copyFile', () => {
 
         expect(returnedData).toEqual(testData2);
     });
-
-
-    afterEach(async () => {
-        await fsPromises.rm(testFilePath);
-        await fsPromises.rm(copiedFilePath);
-
-    })
 
 
 
