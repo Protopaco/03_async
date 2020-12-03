@@ -19,4 +19,11 @@ const getCharacter = async (characterId) => {
     const { name, status, species } = await returnedObject.json();
     return { name, status, species };
 }
-module.exports = { getCharacter }
+
+const getManyCharacters = (idArray) => {
+    const promiseArray = idArray.map(characterId => {
+        return getCharacter(characterId)
+    })
+    return Promise.all(promiseArray)
+}
+module.exports = { getCharacter, getManyCharacters }

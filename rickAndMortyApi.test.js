@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const { getCharacter } = require('./rickAndMortyApi.js')
+const { getCharacter, getManyCharacters } = require('./rickAndMortyApi.js')
 
 
 const characterId = 1;
@@ -10,7 +10,7 @@ const expectedResult = {
 }
 
 const idArray = [1, 2, 3];
-expectedArrayResult[
+expectedArrayResult = [
     {
         name: 'Rick Sanchez',
         status: 'Alive',
