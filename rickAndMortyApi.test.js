@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const { getCharacter } = require('./rickAndMortyApi.js')
 
 
-characterId = '1';
+characterId = 1;
 expectedResult = {
     name: 'Rick Sanchez',
     status: 'Alive',
