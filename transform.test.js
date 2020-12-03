@@ -5,6 +5,9 @@ const testFilePath = './test.txt';
 const testData = "Hello World!";
 
 describe('tests transform.js', () => {
+    afterEach(async () => {
+        await fsPromises.rm(testFilePath);
+    })
 
     it('checks test.txt, and returns stuff', () => {
         return fsPromises.writeFile(testFilePath, testData)

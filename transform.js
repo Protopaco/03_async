@@ -3,13 +3,13 @@ const fsPromises = require('fs').promises;
 const transform = (src) => {
     return fsPromises.readFile(src, 'utf-8')
         .then((data) => {
-            return removeCapitals(data)
+            return transformData(data)
         })
 
 
 }
 
-const removeCapitals = (data) => {
+const transformData = (data) => {
     const noUpperCase = data.replace(/[A-Z]+/g, '');
     const allUpperCase = noUpperCase.toUpperCase();
     const upperCaseArray = allUpperCase.split('');
