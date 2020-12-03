@@ -44,7 +44,7 @@ describe('tests getManyCharacters', () => {
     it('calls getManyCharacters, and expects to see name, status & species for each', () => {
         return getManyCharacters(idArray)
             .then((result) => {
-                expect(expectedArrayResult).toEqual(result)
+                return expect(expectedArrayResult).toEqual(result)
             })
     })
 })

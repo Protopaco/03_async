@@ -20,10 +20,20 @@ const getCharacter = async (characterId) => {
     return { name, status, species };
 }
 
-const getManyCharacters = (idArray) => {
+// const getManyCharacters = (idArray) => {
+
+//     const promiseArray = idArray.map(characterId => {
+//         return getCharacter(characterId)
+//     })
+
+//     return Promise.all(promiseArray)
+// }
+
+const getManyCharacters = async (idArray) => {
     const promiseArray = idArray.map(characterId => {
         return getCharacter(characterId)
     })
-    return Promise.all(promiseArray)
+
+    return await Promise.all(promiseArray);
 }
 module.exports = { getCharacter, getManyCharacters }
