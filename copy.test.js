@@ -30,8 +30,4 @@ describe('tests copy.js', () => {
     })
 
 
-
-
-
-
 })

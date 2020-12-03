@@ -9,13 +9,13 @@ describe('tests transform.js', () => {
         await fsPromises.rm(testFilePath);
     })
 
-    it('checks test.txt, and returns stuff', () => {
+    it('checks test.txt, and transformed string', () => {
         return fsPromises.writeFile(testFilePath, testData)
             .then(() => {
                 return transform(testFilePath)
             })
             .then(data => {
-                console.log(data)
+                return expect(data).toEqual('!DLRO OLLE')
             })
 
 
