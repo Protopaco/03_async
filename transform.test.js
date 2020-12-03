@@ -5,8 +5,8 @@ const testFilePath = './test.txt';
 const testData = "Hello World!";
 
 describe('tests transform.js', () => {
-    afterEach(async () => {
-        await fsPromises.rm(testFilePath);
+    afterEach(() => {
+        return fsPromises.rm(testFilePath);
     })
 
     it('checks test.txt, and transformed string', () => {
@@ -17,9 +17,5 @@ describe('tests transform.js', () => {
             .then(data => {
                 return expect(data).toEqual('!DLRO OLLE')
             })
-
-
     })
-
-
 })
