@@ -4,7 +4,6 @@ const fsPromises = require('fs').promises;
 
 const testFilePath = './test.txt';
 const testData = "Hello World!";
-const testData2 = "Goodbye World!";
 const copiedFilePath = './copy-test.txt';
 
 
@@ -23,10 +22,10 @@ describe('tests copy.js', () => {
                 return copy(testFilePath, copiedFilePath)
             })
             .then(() => {
-                return fsPromises.readFile(copiedFilePath);
+                return fsPromises.readFile(copiedFilePath, 'utf-8');
             })
-            .then(() => {
-                return expect(testData).toEqual(testData);
+            .then(data => {
+                return expect(data).toEqual(testData);
             })
     })
 
